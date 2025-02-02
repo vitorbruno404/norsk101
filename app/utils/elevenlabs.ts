@@ -5,7 +5,7 @@ export const synthesizeSpeech = async (
   voiceId: string
 ): Promise<ArrayBuffer> => {
   const response = await axios.post(
-    `https://api.elevenlabs.io/v1/text-to-speech/${zaWbmcdhZYA4x9RUkuUq}`,
+    `https://api.elevenlabs.io/v1/text-to-speech/${2dhHLsmg0MVma2t041qT}`,
     {
       text,
       model_id: 'eleven_monolingual_v1',
