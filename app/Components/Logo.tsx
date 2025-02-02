@@ -16,7 +16,7 @@ const SimliHeaderLogo = ({ className, children }: Props) => {
 
   const handleClick = async () => {
     console.log('Clicked Simli logo', pathname);
-    window.open('https://simli.com');
+    window.open('https://www.simli.com/?utm_source=vitorbruno.com&utm_medium=banner&utm_campaign=VitorBruno.Com');
   };
 
   return (

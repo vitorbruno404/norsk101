@@ -4,6 +4,7 @@ import DailyIframe, { DailyCall } from "@daily-co/daily-js";
 import VideoBox from "@/app/Components/VideoBox";
 import cn from "./utils/TailwindMergeAndClsx";
 import IconSparkleLoader from "@/media/IconSparkleLoader";
+import { synthesizeSpeech } from "@/utils/elevenlabs";
 
 interface SimliAgentProps {
   onStart: () => void;
@@ -127,6 +128,24 @@ const SimliAgent: React.FC<SimliAgentProps> = ({ onStart, onClose }) => {
       callObject.setLocalAudio(false);
     } else {
       console.log("CallObject is null");
+    }
+  };
+
+  const playVoice = async (text: string, voiceId: string) => {
+    try {
+      const audioData = await synthesizeSpeech(text, voiceId);
+      const audioBlob = new Blob([audioData], { type: 'audio/mpeg' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      
+      await audio.play();
+      
+      // Clean up
+      audio.onended = () => {
+        URL.revokeObjectURL(audioUrl);
+      };
+    } catch (error) {
+      console.error('Error playing voice:', error);
     }
   };
 
